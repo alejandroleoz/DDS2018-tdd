@@ -1,3 +1,11 @@
+
+<!-- test -->
+[![Build Status](https://travis-ci.org/alejandroleoz/DDS2018-tdd.svg?branch=develop)](https://travis-ci.org/alejandroleoz/DDS2018-tdd)
+
+
+<!-- coverage -->
+[![codecov](https://codecov.io/gh/alejandroleoz/DDS2018-tdd/branch/develop/graph/badge.svg)](https://codecov.io/gh/alejandroleoz/DDS2018-tdd)
+
 # TDD
 
 Ejemplo de TDD para la materia "Diseño de Sistemas" (UTN FRBA - 2018)

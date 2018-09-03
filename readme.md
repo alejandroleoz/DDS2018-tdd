@@ -1,17 +1,17 @@
-#TDD
+# TDD
 
 Ejemplo de TDD para la materia "Diseño de Sistemas" (UTN FRBA - 2018)
 
-##Sistema: Cajero Automático
+## Sistema: Cajero Automático
 
-####Sesión
+#### Sesión
 - Una sesión se inicia cuando la tarjeta es leida.
 - Finaliza al expulsar la tarjeta
       
-####Login
+#### Login
 - La validación del PIN se hace mediante un sistema de autenticación externo    
 
-####Operaciones disponibles
+#### Operaciones disponibles
 
 - Extracción rápida
     1) Chequear si el cajero tiene dinero disponible

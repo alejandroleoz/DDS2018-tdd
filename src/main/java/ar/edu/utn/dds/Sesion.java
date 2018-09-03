@@ -8,7 +8,7 @@ public class Sesion {
         return idCliente;
     }
 
-    public void finalizar() {
+    public void finalizar() throws SesionException {
         // todo implementar
     }
 

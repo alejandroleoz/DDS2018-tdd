@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class CajeroTest {
@@ -46,7 +47,7 @@ public class CajeroTest {
         verify(cajeroSpy, times(1)).imprimirComprobante(eq(consulta));
     }
 
-    @Test (expected = SesionException.class)
+    @Test(expected = SesionException.class)
     public void consultaDeSaldo_sinSesionAbierta() throws SesionException, BancoException {
 
         // ejecuto la consulta (debe lanzar exception ya que no hay sesion abierta)
@@ -68,5 +69,44 @@ public class CajeroTest {
         cajero.consultarSaldo();
     }
 
+    @Test
+    public void iniciarSesion() throws SesionException {
+        cajero.iniciarSesion();
+        assertTrue(cajero.haySesionAbierta());
+    }
+
+    @Test(expected = SesionException.class)
+    public void iniciarSesion_haySesionAbierta() throws SesionException {
+
+        // inicio una sesion
+        cajero.iniciarSesion();
+
+        // verifico que se inicio
+        assertTrue(cajero.haySesionAbierta());
+
+        // trato de iniciar sesion
+        cajero.iniciarSesion();
+    }
+
+    @Test
+    public void finalizarSesion() throws SesionException {
+        // inicio
+        cajero.iniciarSesion();
+
+        // verifico que se inicio
+        assertTrue(cajero.haySesionAbierta());
+
+        // finalizo
+        cajero.finalizarSesion();
+
+        // verifico que se cerro
+        assertTrue(cajero.haySesionAbierta());
+    }
+
+    @Test(expected = SesionException.class)
+    public void finalizarSesion_sinSesion() throws SesionException {
+        // finalizo
+        cajero.finalizarSesion();
+    }
 
 }

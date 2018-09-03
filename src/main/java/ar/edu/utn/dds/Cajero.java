@@ -11,7 +11,7 @@ public class Cajero {
      * @return una {@link Operacion} de tipo {@link ConsultaSaldo} con la informacion solicitada
      */
     public ConsultaSaldo consultarSaldo() throws SesionException, BancoException {
-        if(!this.tieneSesionAbierta()){
+        if (!this.haySesionAbierta()) {
             throw new SesionException("Abra una sesion antes de operar");
         }
         String cbu = banco.getCuentaDefault(sesion.getIdCliente());
@@ -26,18 +26,21 @@ public class Cajero {
      *
      * @return
      */
-    public void iniciarSesion() {
-        // todo implementar
+    public void iniciarSesion() throws SesionException {
+        if (haySesionAbierta()) {
+            throw new SesionException("No se puede iniciar una nueva sesion");
+        }
         this.sesion = new Sesion();
     }
 
     /**
      * Finaliza una sesion en el cajero
      */
-    public void finalizarSesion() {
-        if(tieneSesionAbierta()){
-            sesion.finalizar();
+    public void finalizarSesion() throws SesionException {
+        if (!haySesionAbierta()) {
+            throw new SesionException("No hay sesion abierta");
         }
+        sesion.finalizar();
     }
 
     public BancoFacade getBanco() {
@@ -48,7 +51,7 @@ public class Cajero {
         this.banco = banco;
     }
 
-    public Boolean tieneSesionAbierta() {
+    public Boolean haySesionAbierta() {
         return this.sesion != null;
     }
 

@@ -17,7 +17,7 @@ public class CajeroTest {
     }
 
     @Test
-    public void consultaDeSaldo() throws SesionException {
+    public void consultaDeSaldo() throws SesionException, BancoException {
 
         Double expectedSaldo = 25D;
         String expectedCBU = "123457656345658";
@@ -47,9 +47,24 @@ public class CajeroTest {
     }
 
     @Test (expected = SesionException.class)
-    public void consultaDeSaldo_sinSesionAbierta() throws SesionException {
+    public void consultaDeSaldo_sinSesionAbierta() throws SesionException, BancoException {
 
         // ejecuto la consulta (debe lanzar exception ya que no hay sesion abierta)
+        cajero.consultarSaldo();
+    }
+
+    @Test(expected = BancoException.class)
+    public void consultaDeSaldo_bancoException() throws BancoException, SesionException {
+        // Mock banco
+        BancoFacade bancoMock = mock(BancoFacade.class);
+        when(bancoMock.getSaldo(anyString())).thenThrow(new BancoException());
+        when(bancoMock.getCuentaDefault(anyString())).thenThrow(new BancoException());
+
+        // seteo el mock en el cajero
+        cajero.setBanco(bancoMock);
+
+        // ejecuto la consulta
+        cajero.iniciarSesion();
         cajero.consultarSaldo();
     }
 

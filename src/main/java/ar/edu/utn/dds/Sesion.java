@@ -7,4 +7,9 @@ public class Sesion {
     public String getIdCliente() {
         return idCliente;
     }
+
+    public void finalizar() {
+        // todo implementar
+    }
+
 }

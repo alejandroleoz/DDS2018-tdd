@@ -7,9 +7,10 @@ public class Cajero {
 
     /**
      * Realiza una consulta de saldo
+     *
      * @return una {@link Operacion} de tipo {@link ConsultaSaldo} con la informacion solicitada
      */
-    public ConsultaSaldo consultarSaldo() throws SesionException {
+    public ConsultaSaldo consultarSaldo() throws SesionException, BancoException {
         if(!this.tieneSesionAbierta()){
             throw new SesionException("Abra una sesion antes de operar");
         }
@@ -22,6 +23,7 @@ public class Cajero {
 
     /**
      * Inicia una sesion en el cajero
+     *
      * @return
      */
     public void iniciarSesion() {
@@ -33,7 +35,9 @@ public class Cajero {
      * Finaliza una sesion en el cajero
      */
     public void finalizarSesion() {
-        // todo implementar
+        if(tieneSesionAbierta()){
+            sesion.finalizar();
+        }
     }
 
     public BancoFacade getBanco() {

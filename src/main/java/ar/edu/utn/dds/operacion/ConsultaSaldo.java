@@ -1,4 +1,4 @@
-package ar.edu.utn.dds;
+package ar.edu.utn.dds.operacion;
 
 public class ConsultaSaldo implements Operacion {
 
